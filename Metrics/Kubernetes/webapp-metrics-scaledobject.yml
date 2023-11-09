@@ -1,0 +1,14 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: metrics-scaledobject
+spec:
+  maxReplicaCount: 10
+  scaleTargetRef:
+    name: webapp
+  triggers:
+  - type: metrics-api
+    metadata:
+      targetValue: "5"
+      url: "https://endpoint/metrics"
+      valueLocation: 'targetValue'
